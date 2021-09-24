@@ -1,0 +1,143 @@
+/* Header */
+.AppHeader {
+    min-width: inherit;
+}
+.AppHeader-inner {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.SearchBar {
+    display: none;
+}
+.AppHeader-messages, .AppHeader-notifications {
+    margin-right: 16px;
+}
+.AppHeader-userInfo {
+    margin-right: 50px;
+}
+.AppHeader-navItem {
+    padding: 0 5px;
+}
+.AppHeader-nav {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+.TopstoryPageHeader-main {
+    margin-left: 16px;
+}
+
+/* 通用列表 */
+.Topstory-container, .Question-main, .Profile-main {
+    display: block;
+    width: 100%;
+    padding: 0px;
+}
+.Topstory-mainColumn, .Question-mainColumn, .Profile-mainColumn {
+    width: 100%;
+}
+.Question-sideColumn, .Profile-sideColumn {
+    width: 100%;
+}
+
+/* 回答页面的Header */
+.QuestionHeader .QuestionHeader-content {
+    width: 100%;
+    display: block;
+    padding: 0px;
+}
+.QuestionHeader .QuestionHeader-main {
+    width: 100%;
+}
+.QuestionHeader .QuestionHeader-side {
+    width: 100%; 
+}
+.QuestionHeader .NumberBoard {
+    margin: auto;
+}
+.QuestionHeader {
+    min-width: inherit;
+}
+.PageHeader .QuestionHeader-content {
+    width: 100%;
+}
+.PageHeader .QuestionHeader-main {
+    width: 100%;
+    padding: 0px;
+}
+.PageHeader .QuestionHeader-side {
+    display: none;
+}
+
+/* 个人主页的Header */
+.ProfileHeader {
+    width: 100%;
+    padding: 0px;
+}
+
+/* 列表Item上的按钮 */
+.ShareMenu {
+    display: none;
+}
+.ContentItem-action {
+    margin-left: 8px;
+}
+
+/* 专栏页面 */
+.Post-NormalMain .Post-Header, .Post-NormalMain>div {
+    width: 100%;
+}
+.ColumnPageHeader-content {
+    width: 100%;
+}
+/* 弹窗 */
+.Modal-closeButton {
+    position: static;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Modal {
+    width: 100%;
+}
+
+.ChatBox {
+    width: 100%;
+    min-width: 100%;
+}
+
+.ImageView-inner img {
+    width: 100%!important;
+}
+
+/* 2021新版 */
+.TopstoryPageHeader,.AppHeader-inner {
+    max-width:none!important;
+    min-width: auto!important;
+    padding-left: 0;
+    /* overflow-y: scroll; */
+}
+
+.css-1u8pbev {
+    flex: 0 0 108px;
+}
+.css-1acwmmj {
+    justify-content: flex-start
+}
+.TopstoryTabs-link {
+    margin: 0 15px;
+}
+.AppHeader-SearchBar {
+    max-width: 182px;
+}
+
+.Tabs.AppHeader-Tabs {
+    margin: 0;
+}
+
+.TopstoryTabs.TopstoryPageHeader-tabs {
+    padding-left: 0;
+}
+
+.css-11h6utu {
+    width: 100%;
+}
