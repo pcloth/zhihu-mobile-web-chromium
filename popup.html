@@ -18,6 +18,9 @@
 	}
 	.option{
 		font-size: 24px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	.option input{
 		transform: scale(1.7);
@@ -48,9 +51,14 @@
 			<label for="noVideo">屏蔽视频</label>
 			<input type="checkbox" id="noVideo" class="checkbox">
 		</div>
+		<div class="option">
+			<label for="noAdv">屏蔽广告</label>
+			<input type="checkbox" id="noAdv" class="noAdv">
+		</div>
 		<p class="tip1">更改选项后需手动刷新页面</p>
 		<p class="tip2" id="tip2"><i>不开启PC版页面时，建议关闭该插件，以减少资源占用</i></p>
 	</div>
+	<script type="text/javascript" src="js/options.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
 </body>
 </html>

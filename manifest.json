@@ -39,6 +39,7 @@
       {
          "js": [
             "js/jquery.min.js",
+            "js/options.js",
             "js/common.js",
             "js/Topstory.js"
          ],
@@ -50,6 +51,7 @@
       {
          "js": [
             "js/jquery.min.js",
+            "js/options.js",
             "js/common.js",
             "js/QuestionPage.js"
          ],
@@ -61,6 +63,7 @@
       {
          "js": [
             "js/jquery.min.js",
+            "js/options.js",
             "js/common.js",
             "js/Search.js"
          ],
@@ -72,6 +75,7 @@
       {
          "js": [
             "js/jquery.min.js",
+            "js/options.js",
             "js/common.js",
             "js/Profile.js"
          ],
@@ -83,6 +87,7 @@
       {
          "js": [
             "js/jquery.min.js",
+            "js/options.js",
             "js/common.js",
             "js/Topic.js"
          ],

@@ -1,21 +1,7 @@
-let options = {
-	enablePc: true, // 指定PC ua
-	optimize: true, // 优化手机样式
-	noVideo: false // 隐藏视频回答
-}
-let keysArr = Object.keys(options)
 
-// 读取参数
-function loadOptions() {
-	chrome.storage.local.get(keysArr, function (data) {
-		Object.assign(options, data)
-		window.onload = function () {
-			fixedMobile();
-		}
-	});
-}
-
-loadOptions()
+loadOptions().then(_=>{
+	fixedMobile()
+})
 
 $.fn.onSwipeRight = function (callback) {
 	$(this).on("touchstart", function (e) {
@@ -43,22 +29,15 @@ function insertCss() {
 
 }
 
-function fixedMobile() {
-	// 修复手机版的一些显示字样
-	let a = $('a.Tabs-link.AppHeader-TabsLink');
-
-	if (a && a.length >= 3) {
-		a[3].text = '你答';
-	}
-
-	// 隐藏顶部关注栏的知乎图标链接，节省空间
-	$('.AppHeader-inner a[aria-label="知乎"]').remove();
-
+function fixedSearchInput(){
 	// 给搜索表单添加事件缩放尺寸
 	let input = document.querySelector('form.SimpleSearchBar-wrapper input.Input');
 	let form = document.querySelector('form.SimpleSearchBar-wrapper');
-	
+	// 这个css是知乎动态赋予的，所以要延迟2秒开始执行；
 	let box = document.querySelector('.TopstoryPageHeader-aside');
+	if(!box || !box.style){
+		return setTimeout(fixedSearchInput,200)
+	}
 	box.style.setProperty('margin-left', '220px')
 	input.addEventListener('focus', function () {
 		form.style.setProperty('width', '200px');
@@ -73,7 +52,22 @@ function fixedMobile() {
 		form.style.setProperty('width', '80px');
 		box.style.setProperty('margin-left', '220px');
 	})
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
 
+}
+
+function fixedMobile() {
+	// 修复手机版的一些显示字样
+	let a = $('a.Tabs-link.AppHeader-TabsLink');
+
+	if (a && a.length >= 3) {
+		a[3].text = '你答';
+	}
+
+	// 隐藏顶部关注栏的知乎图标链接，节省空间
+	$('.AppHeader-inner a[aria-label="知乎"]').remove();
+	
+	fixedSearchInput()
 
 	// 动态处理内容
 	removeThankButton(document)
@@ -96,24 +90,40 @@ function fixedMobile() {
 // 查找视频节点的父节点，找到答案卡片，直接移除
 function __video_parent__(item) {
 	if (item.parentElement.className.includes('Card TopstoryItem')) {
-		return item.parentElement.remove()
+		// 使用隐藏，避免知乎自己的刷新功能失效；
+		return item.parentElement.hidden = true;
 	} else {
 		return __video_parent__(item.parentElement)
 	}
 }
 
+
 // 隐藏视频
 function hideVideo(node) {
+	let selectors = [
+		// 两种视频格式
+		// '.VideoAnswerPlayer',
+		// 广告
+		// '.Pc-feedAd-container' 
+	]
+	
+	if(options.noVideo){
+		selectors.push('.ZVideoItem-video')
+	}
+	if(options.noAdv){
+		// 屏蔽广告
+		selectors.push('.Pc-feedAd-container')
+	}
+	let selectorsString = selectors.join(',')
 	if (options.noVideo) {
-		let selectors = ['.ContentItem.ZVideoItem', '.ZVideoItem-video', '.VideoAnswerPlayer']
-		for (let i in selectors) {
-			node.querySelectorAll(selectors[i]).forEach(item => {
-				__video_parent__(item)
-			})
-		}
+		node.querySelectorAll(selectorsString).forEach(item => {
+			console.log(item,'>>>>')
+			__video_parent__(item)
+		})
 	}
 }
 
+// 处理感谢按钮
 function removeThankButton(node) {
 	node.querySelectorAll('button.ContentItem-action')
 		.forEach(btn => {
@@ -123,7 +133,6 @@ function removeThankButton(node) {
 				let text = $text.textContent.replace(' ', '');
 
 				if (['感谢', '取消感谢', '举报', '收藏', '喜欢'].indexOf(text) >= 0) {
-					// btn.style.display = 'none'
 					$text.textContent = ''
 				} else if (text === '添加评论') {
 					$text.textContent = '评论'

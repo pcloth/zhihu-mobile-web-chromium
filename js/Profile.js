@@ -5,7 +5,6 @@
 		$sideBar = $('.Profile-sideColumn', $main);
 
 		insertCss();
-		// createSideMenu();
 
 		//修改 应用内打开 链接
 		var params = window.location.pathname.split('/');
@@ -13,9 +12,5 @@
 			$(".tb-app", $leftSide).attr('href', 'zhihu://people/' + params[2]);
 		else
 			$(".tb-app", $leftSide).attr('href', 'zhihu://');
-
-		// moveRightSide();
-
-		document.body.style.display = '';
 	}
 });

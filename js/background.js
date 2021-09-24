@@ -27,8 +27,9 @@ chrome.storage.onChanged.addListener(function(changes){
 		checkEnablePc(changes.enablePc.newValue);
 });
 
+// 初始化参数
 chrome.runtime.onInstalled.addListener(function(){
-	chrome.storage.local.set({enablePc: true, optimize: true});
+	chrome.storage.local.set(options);
 	checkEnablePc(true);
 });
 
