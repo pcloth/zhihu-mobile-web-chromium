@@ -141,3 +141,29 @@
 .css-11h6utu {
     width: 100%;
 }
+
+.SearchTabs-actions .Tabs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+.SearchTabs-actions .Popover {
+    margin-left: -170px;
+    margin-right: 30px;
+    margin-top: 50px;
+}
+
+.SearchMain {
+    width: 100%;
+}
+
+.SearchTabs-inner {
+    width: auto;
+}
+.SearchCorrection {
+    width: auto;
+}
+.Search-container {
+    width: auto;
+}

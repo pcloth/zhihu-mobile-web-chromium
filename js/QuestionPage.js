@@ -1,30 +1,30 @@
-﻿chrome.storage.local.get(['enablePc', 'optimize'], function(data){
+﻿
+// 问题页面和答案页面处理 ver 2021-09-25
+loadOptions().then(data=>{
 	if(data.enablePc && data.optimize){
-		$main = $("main.App-main .QuestionPage", $root);
-		$mainColumn = $('.Question-mainColumn', $main);
-		$sideBar = $('.Question-sideColumn', $main);
-
 		insertCss();
-		// createSideMenu();
+		fixedTimeLineMobile();
+		removeAdv();
 
-		var params = window.location.pathname.split('/');
-		if( params[3] && params[3] === 'answer' && params[4])
-			$(".tb-app", $leftSide).attr('href', 'zhihu://answer/' + params[4]);
-		else if( params[1] && params[1] === 'question' && params[2])
-			$(".tb-app", $leftSide).attr('href', 'zhihu://questions/' + params[2]);
-		else
-			$(".tb-app", $leftSide).attr('href', 'zhihu://');
-
-		//删除 查看全部回答 按钮的事件
-		var $questionMainAction = $(".QuestionMainAction", $main);
-		if( $questionMainAction.length > 0){
-			var allAnswerLink = $questionMainAction.attr('href');
-			var allAnswerText = $questionMainAction.eq(0).text();
-			$(`<a class="QuestionMainAction" href="${allAnswerLink}">${allAnswerText}</a>`).replaceAll( $questionMainAction);
-		}
-
-		// moveRightSide();
-
-		document.body.style.display = '';
+		// 懒加载处理广告
+		new MutationObserver((mutations, observer) => {
+			for (let m of mutations) {
+				for (let node of m.addedNodes) {
+					if (node.nodeType === Node.ELEMENT_NODE) {
+						removeAdv(node)
+					}
+				}
+			}
+		}).observe(document.body, {
+			childList: true,
+			subtree: true
+		})	
 	}
-});
+})
+
+// 问题答案页面的独立广告
+function removeAdv(){
+	document.querySelectorAll('.Pc-card.Card').forEach(item=>{
+		item.remove();
+	})
+}

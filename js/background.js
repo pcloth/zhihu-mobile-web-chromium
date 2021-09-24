@@ -33,11 +33,6 @@ chrome.runtime.onInstalled.addListener(function(){
 	checkEnablePc(true);
 });
 
-chrome.runtime.onMessage.addListener(function(message, sender){
-	if(message.zhihutabletInjected == true){
-		chrome.pageAction.show(sender.tab.id); //对移动端yandex无意义
-	}
-});
 
 chrome.storage.local.get('enablePc', function(data){
 	if(data.enablePc !== undefined)

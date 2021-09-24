@@ -1,13 +1,12 @@
-﻿chrome.runtime.sendMessage({zhihutabletInjected: true}, function(n){
-	chrome.storage.local.get(['enablePc', 'optimize'], function(data){
-		if(data.enablePc){
-			var t=document.createElement("script");
-			t.type="text/javascript";
-			t.text="navigator.__defineGetter__('userAgent', function () { return 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 YaBrowser/18.4.1.488.00 Safari/537.36'; });";
-			document.getElementsByTagName("head")[0].appendChild(t);
+﻿// 加载配置参数后插入改变UA信息,使之伪装成PC浏览器
+let ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
+loadOptions().then(data=>{
+	if(data.enablePc){
+		console.log('控制UA')
+		var t=document.createElement("script");
+		t.type="text/javascript";
+		t.text=`navigator.__defineGetter__('userAgent', function () { return '${ua}'; });`;
+		document.getElementsByTagName("head")[0].appendChild(t);
+	}
+})
 
-			// if(data.optimize)
-			// 	document.body.style.display = 'none';
-		}
-	});
-});

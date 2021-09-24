@@ -20,39 +20,44 @@
    "content_scripts": [
       {
          "js": [
+            "js/options.js",
+            "js/jquery.min.js",
+            "js/common.js",
             "js/pretreat.js"
          ],
          "matches": [
-            "*://www.zhihu.com/",
-            "*://www.zhihu.com/question/*",
-            "*://www.zhihu.com/search*",
-            "*://www.zhihu.com/people/*",
-            "*://www.zhihu.com/topic/*",
+            "*://www.zhihu.com/*",
             "*://zhuanlan.zhihu.com/*"
          ],
          "exclude_matches": [
-            "*://www.zhihu.com/topic",
-            "*://zhuanlan.zhihu.com/"
+            "*://www.zhihu.com/topic"
          ],
          "run_at": "document_start"
       },
       {
          "js": [
-            "js/jquery.min.js",
-            "js/options.js",
-            "js/common.js",
             "js/Topstory.js"
          ],
          "matches": [
-            "*://www.zhihu.com/"
+            "*://www.zhihu.com/",
+            "*://www.zhihu.com/follow",
+            "*://www.zhihu.com/hot"
          ],
          "run_at": "document_end"
       },
       {
          "js": [
-            "js/jquery.min.js",
-            "js/options.js",
-            "js/common.js",
+            "js/zhuanlan.js"
+         ],
+         "matches": [
+            "*://zhuanlan.zhihu.com/*"
+         ],
+         "exclude_matches": [
+         ],
+         "run_at": "document_end"
+      },
+      {
+         "js": [
             "js/QuestionPage.js"
          ],
          "matches": [
@@ -62,9 +67,6 @@
       },
       {
          "js": [
-            "js/jquery.min.js",
-            "js/options.js",
-            "js/common.js",
             "js/Search.js"
          ],
          "matches": [
@@ -74,9 +76,6 @@
       },
       {
          "js": [
-            "js/jquery.min.js",
-            "js/options.js",
-            "js/common.js",
             "js/Profile.js"
          ],
          "matches": [
@@ -86,9 +85,6 @@
       },
       {
          "js": [
-            "js/jquery.min.js",
-            "js/options.js",
-            "js/common.js",
             "js/Topic.js"
          ],
          "matches": [
@@ -98,20 +94,8 @@
             "*://www.zhihu.com/topic"
          ],
          "run_at": "document_end"
-      },
-      {
-         "js": [
-            "js/jquery.min.js",
-            "js/zhuanlan.js"
-         ],
-         "matches": [
-            "*://zhuanlan.zhihu.com/*"
-         ],
-         "exclude_matches": [
-            "*://zhuanlan.zhihu.com/"
-         ],
-         "run_at": "document_end"
       }
+      
    ],
    "icons": {
       "16": "img/icon16.png",
