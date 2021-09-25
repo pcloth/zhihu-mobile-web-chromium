@@ -167,3 +167,17 @@
 .Search-container {
     width: auto;
 }
+
+.QuestionWaiting {
+    width: 100vw;
+}
+
+.QuestionWaiting-mainColumn {
+    margin-right:0;
+    width: 100%;
+}
+
+.QuestionType {
+    height: auto;
+    padding: 2px 10px;
+}

@@ -10,7 +10,7 @@
       "tabs",
       "storage"
    ],
-   "version": "2021.09.24",
+   "version": "2021.09.25",
    "background": {
       "page": "background.html"
    },
