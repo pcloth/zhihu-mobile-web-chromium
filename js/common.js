@@ -118,7 +118,6 @@ function hideVideo(node) {
 	let selectorsString = selectors.join(',')
 	if (options.noVideo) {
 		node.querySelectorAll(selectorsString).forEach(item => {
-			console.log(item,'>>>>')
 			__video_parent__(item)
 		})
 	}

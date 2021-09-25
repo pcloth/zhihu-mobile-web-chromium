@@ -33,6 +33,13 @@ chrome.runtime.onInstalled.addListener(function(){
 	checkEnablePc(true);
 });
 
+// 接受pretreat传回事件
+chrome.runtime.onMessage.addListener(function(message, sender){
+	if(message.zhihuInjected == true){
+		// 显示popup.html
+		chrome.pageAction.show(sender.tab.id);
+	}
+});
 
 chrome.storage.local.get('enablePc', function(data){
 	if(data.enablePc !== undefined)
