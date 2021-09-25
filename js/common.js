@@ -1,6 +1,6 @@
 // 插入css优化
 function insertCss() {
-	const myCss = chrome.runtime.getURL('zhihutablet.css');
+	const myCss = chrome.runtime.getURL('zhihuMobile.css');
 	$("head").append(`<link type="text/css" rel="stylesheet" href="${myCss}">`);
 
 }

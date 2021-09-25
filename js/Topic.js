@@ -1,14 +1,7 @@
-﻿chrome.storage.local.get(['enablePc', 'optimize'], function(data){
+﻿// 话题页面//似乎知乎已经放弃话题页面了，功能很多有问题 ver 2021-09-25
+loadOptions().then(data=>{
 	if(data.enablePc && data.optimize){
-		$main = $("main.App-main .ContentLayout", $root);
-		$mainColumn = $('.ContentLayout-mainColumn', $main);
-		$sideBar = $('.ContentLayout-sideColumn', $main);
-
 		insertCss();
-		// createSideMenu();
-		$(".tb-app", $leftSide).attr('href', 'zhihu://');
-		// moveRightSide();
-
-		document.body.style.display = '';
+		fixedTimeLineMobile();
 	}
-});
+})

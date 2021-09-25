@@ -2,7 +2,6 @@
 let ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'
 loadOptions().then(data=>{
 	if(data.enablePc){
-		console.log('控制UA')
 		var t=document.createElement("script");
 		t.type="text/javascript";
 		t.text=`navigator.__defineGetter__('userAgent', function () { return '${ua}'; });`;
