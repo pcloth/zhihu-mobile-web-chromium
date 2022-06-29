@@ -84,6 +84,7 @@ function fixedTimeLineMobile() {
 				if (node.nodeType === Node.ELEMENT_NODE) {
 					removeThankButton(node)
 					hideVideo(node)
+					popupCommentWindow(node)
 				}
 			}
 		}
@@ -144,4 +145,18 @@ function removeThankButton(node) {
 			}
 		})
 
+}
+
+// 当文章展开得时候，点击评论，会是一个弹窗，处理弹窗得宽度和关闭按钮
+function popupCommentWindow(node){
+	const popup = $("div[class^='css-'][tabindex='0']")
+	if(popup && popup[0] && popup[0].style){
+		popup[0].style.width = '100%'
+		const button = popup.find('button[aria-label="关闭"]')
+		if(button && button[0]){
+			button[0].style.right='140px';
+			button[0].style.background='#ccc';
+			button[0].style.top='0px';
+		}
+	}
 }
