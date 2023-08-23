@@ -38,7 +38,7 @@ function fixedSearchInput(){
 	// 给搜索表单添加事件缩放尺寸
 	let input = document.querySelector('form.SimpleSearchBar-wrapper input.Input');
 	let form = document.querySelector('form.SimpleSearchBar-wrapper');
-	// 这个css是知乎动态赋予的，所以要延迟2秒开始执行；
+	// 这个css是知乎动态赋予的，所以要延迟200ms开始执行；
 	let box = document.querySelector('.TopstoryPageHeader-aside');
 	if(!box || !box.style){
 		return setTimeout(fixedSearchInput,200)
@@ -85,6 +85,7 @@ function fixedTimeLineMobile() {
 					removeThankButton(node)
 					hideVideo(node)
 					popupCommentWindow(node)
+					findImageElement(node)
 				}
 			}
 		}
@@ -159,4 +160,13 @@ function popupCommentWindow(node){
 			button[0].style.top='0px';
 		}
 	}
+}
+
+/** 查找图片元素，给它添加打开新窗口，方便放大查看 */
+function findImageElement(node) {
+	node.querySelectorAll('figure[data-size="normal"] img').forEach(img => {
+		img.addEventListener('click', function () {
+			window.open(img.src)
+		})
+	})
 }
