@@ -15,7 +15,12 @@
     margin-right: 16px;
 }
 .AppHeader-userInfo {
-    margin-right: 50px;
+    margin-left: 20px!important;
+    margin-right: 20px!important;
+}
+
+.AppHeader-userInfo a[href="https://www.zhihu.com/creator"] {
+    margin-right: 10px;
 }
 .AppHeader-navItem {
     padding: 0 5px;
@@ -24,9 +29,9 @@
     margin-left: 16px;
     margin-right: 16px;
 }
-.TopstoryPageHeader-main {
+/* .TopstoryPageHeader-main {
     margin-left: 16px;
-}
+} */
 
 /* 通用列表 */
 .Topstory-container, .Question-main, .Profile-main {
@@ -115,7 +120,8 @@
     max-width:none!important;
     min-width: auto!important;
     padding-left: 0;
-    overflow: auto!important;
+    overflow-y: hidden!important;
+    overflow-x: scroll!important;
 }
 .TopstoryPageHeader::-webkit-scrollbar,
 .AppHeader-inner::-webkit-scrollbar {
@@ -129,7 +135,13 @@
     justify-content: flex-start
 }
 .TopstoryTabs-link {
-    margin: 0 15px;
+    margin: 0 8px;
+}
+.TopstoryPageHeader-aside {
+    margin-left: 90px!important;
+}
+.SimpleSearchBar-wrapper {
+    width: 100px;
 }
 .AppHeader-SearchBar {
     max-width: 182px;
@@ -137,6 +149,10 @@
 
 .Tabs.AppHeader-Tabs {
     margin: 0;
+}
+
+.AppHeader-Tab {
+    padding: 0 5px!important;
 }
 
 .TopstoryTabs.TopstoryPageHeader-tabs {

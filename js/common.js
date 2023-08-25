@@ -71,7 +71,13 @@ function fixedTimeLineMobile() {
 	}
 
 	// 隐藏顶部关注栏的知乎图标链接，节省空间
-	$('.AppHeader-inner a[aria-label="知乎"]').remove();
+	setTimeout(()=>{
+		$('.AppHeader-inner a[aria-label="知乎"]').remove();
+		$('.TopstoryPageHeader-main a[aria-label="知乎"]').remove();
+	},200)
+	
+	// 移除知学堂
+	$('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]').remove();
 	
 	fixedSearchInput()
 
