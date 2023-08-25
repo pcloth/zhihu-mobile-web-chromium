@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
 }
+
 .SearchBar {
     display: none;
 }
@@ -114,7 +115,11 @@
     max-width:none!important;
     min-width: auto!important;
     padding-left: 0;
-    /* overflow-y: scroll; */
+    overflow: auto!important;
+}
+.TopstoryPageHeader::-webkit-scrollbar,
+.AppHeader-inner::-webkit-scrollbar {
+    display: none!important;
 }
 
 .css-1u8pbev {
