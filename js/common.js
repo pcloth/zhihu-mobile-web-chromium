@@ -43,6 +43,12 @@ function fixedSearchInput(){
 	if(!box || !box.style){
 		return setTimeout(fixedSearchInput,200)
 	}
+	// 隐藏顶部关注栏的知乎图标链接，节省空间
+	$('.AppHeader-inner a[aria-label="知乎"]').remove();
+	$('.TopstoryPageHeader-main a[aria-label="知乎"]').remove();
+	// 移除知学堂
+	$('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]').remove();
+	
 	box.style.setProperty('margin-left', '220px')
 	input.addEventListener('focus', function () {
 		form.style.setProperty('width', '200px');
@@ -70,14 +76,6 @@ function fixedTimeLineMobile() {
 		a[3].text = '你答';
 	}
 
-	// 隐藏顶部关注栏的知乎图标链接，节省空间
-	setTimeout(()=>{
-		$('.AppHeader-inner a[aria-label="知乎"]').remove();
-		$('.TopstoryPageHeader-main a[aria-label="知乎"]').remove();
-	},200)
-	
-	// 移除知学堂
-	$('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]').remove();
 	
 	fixedSearchInput()
 
