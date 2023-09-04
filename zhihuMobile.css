@@ -8,8 +8,12 @@
     padding: 0;
 }
 
-.SearchBar {
+.AppHeader-inner .SearchBar {
     display: none;
+}
+
+.SearchBar-input {
+    width: 100px;
 }
 .AppHeader-messages, .AppHeader-notifications {
     margin-right: 16px;

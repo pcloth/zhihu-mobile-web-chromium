@@ -40,29 +40,32 @@ function fixedSearchInput(){
 	let form = document.querySelector('form.SimpleSearchBar-wrapper');
 	// 这个css是知乎动态赋予的，所以要延迟200ms开始执行；
 	let box = document.querySelector('.TopstoryPageHeader-aside');
-	if(!box || !box.style){
+    const logo = $('.AppHeader-inner a[aria-label="知乎"]')
+    const logo2 = $('.TopstoryPageHeader-main a[aria-label="知乎"]')
+    const zst = $('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]')
+	if(!box || !box.style || !logo || !logo2 ||!zst){
 		return setTimeout(fixedSearchInput,200)
 	}
 	// 隐藏顶部关注栏的知乎图标链接，节省空间
-	$('.AppHeader-inner a[aria-label="知乎"]').remove();
-	$('.TopstoryPageHeader-main a[aria-label="知乎"]').remove();
+	logo.remove();
+	logo2.remove();
 	// 移除知学堂
-	$('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]').remove();
+	zst.remove();
 	
-	box.style.setProperty('margin-left', '220px')
-	input.addEventListener('focus', function () {
-		form.style.setProperty('width', '200px');
-		box.style.setProperty('margin-left', '0px');
-	})
+	// box.style.setProperty('margin-left', '220px')
+	// input.addEventListener('focus', function () {
+	// 	form.style.setProperty('width', '200px');
+	// 	box.style.setProperty('margin-left', '0px');
+	// })
 
-	form.addEventListener('click', function () {
-		input.focus()
-	})
+	// form.addEventListener('click', function () {
+	// 	input.focus()
+	// })
 
-	input.addEventListener('blur', function () {
-		form.style.setProperty('width', '80px');
-		box.style.setProperty('margin-left', '220px');
-	})
+	// input.addEventListener('blur', function () {
+	// 	form.style.setProperty('width', '80px');
+	// 	box.style.setProperty('margin-left', '220px');
+	// })
 	document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 }
@@ -71,12 +74,9 @@ function fixedSearchInput(){
 function fixedTimeLineMobile() {
 	// 修复手机版的一些显示字样
 	let a = $('a.Tabs-link.AppHeader-TabsLink');
-
 	if (a && a.length >= 3) {
 		a[3].text = '你答';
 	}
-
-	
 	fixedSearchInput()
 
 	// 动态处理内容
@@ -86,10 +86,12 @@ function fixedTimeLineMobile() {
 		for (let m of mutations) {
 			for (let node of m.addedNodes) {
 				if (node.nodeType === Node.ELEMENT_NODE) {
-					removeThankButton(node)
-					hideVideo(node)
-					popupCommentWindow(node)
-					findImageElement(node)
+                    // 添加延迟，免得有些数据还没加载成功；
+                    setTimeout(()=>{
+                        removeThankButton(node)
+					    hideVideo(node)
+					    popupCommentWindow(node)
+                    },400)
 				}
 			}
 		}
@@ -164,13 +166,4 @@ function popupCommentWindow(node){
 			button[0].style.top='0px';
 		}
 	}
-}
-
-/** 查找图片元素，给它添加打开新窗口，方便放大查看 */
-function findImageElement(node) {
-	node.querySelectorAll('figure[data-size="normal"] img').forEach(img => {
-		img.addEventListener('click', function () {
-			window.open(img.src)
-		})
-	})
 }
