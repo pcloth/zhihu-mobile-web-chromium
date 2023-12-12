@@ -36,13 +36,13 @@ function addCSSText(cssText){
 // 处理顶部搜索栏目
 function fixedSearchInput(){
 	// 给搜索表单添加事件缩放尺寸
-	let input = document.querySelector('form.SimpleSearchBar-wrapper input.Input');
-	let form = document.querySelector('form.SimpleSearchBar-wrapper');
+	// let input = document.querySelector('form.SimpleSearchBar-wrapper input.Input');
+	// let form = document.querySelector('form.SimpleSearchBar-wrapper');
 	// 这个css是知乎动态赋予的，所以要延迟200ms开始执行；
 	let box = document.querySelector('.TopstoryPageHeader-aside');
-    const logo = $('.AppHeader-inner a[aria-label="知乎"]')
-    const logo2 = $('.TopstoryPageHeader-main a[aria-label="知乎"]')
-    const zst = $('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]')
+    const logo = document.querySelector('.AppHeader-inner a[aria-label="知乎"]')
+    const logo2 = document.querySelector('.TopstoryPageHeader-main a[aria-label="知乎"]')
+    const zst = document.querySelector('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]')
 	if(!box || !box.style || !logo || !logo2 ||!zst){
 		return setTimeout(fixedSearchInput,200)
 	}
@@ -133,7 +133,13 @@ function hideVideo(node) {
 
 // 处理感谢按钮
 function removeThankButton(node) {
-	// button.BottomActions-CommentBtn为专栏的浮动按钮，下面的申请转载也是专栏特有
+	// 赞同数量减少字
+    node.querySelectorAll('.Button.VoteButton.VoteButton--up')
+        .forEach(btn=>{
+            btn.childNodes[1].textContent = btn.childNodes[1].textContent.replace('赞同','赞')
+        })
+
+    // button.BottomActions-CommentBtn为专栏的浮动按钮，下面的申请转载也是专栏特有
 	node.querySelectorAll('button.ContentItem-action,button.BottomActions-CommentBtn')
 		.forEach(btn => {
 			let $text = btn.childNodes[1]
@@ -146,6 +152,8 @@ function removeThankButton(node) {
 					$text.textContent = '评论'
 				} else if ((group = text.match(/(\d+)条评论/))) {
 					$text.textContent = `${group[1]}`
+                } else if(text === '收起评论'){
+                    $text.textContent = '收评论'
 				} else {
 					console.log($text, 'text', text)
 				}
