@@ -1,29 +1,29 @@
 // 插入css优化
 function insertCss() {
-	const myCss = chrome.runtime.getURL('zhihuMobile.css');
-	$("head").append(`<link type="text/css" rel="stylesheet" href="${myCss}">`);
+    const myCss = chrome.runtime.getURL('zhihuMobile.css');
+    $("head").append(`<link type="text/css" rel="stylesheet" href="${myCss}">`);
 
 }
 
-function addCSSText(cssText){
+function addCSSText(cssText) {
     let style = document.createElement('style'),  //创建一个style元素
         head = document.head || document.getElementsByTagName('head')[0]; //获取head元素
     style.type = 'text/css'; //这里必须显示设置style元素的type属性为text/css，否则在ie中不起作用
-    if(style.styleSheet){ //IE
-        let func = function(){
-            try{ //防止IE中stylesheet数量超过限制而发生错误
+    if (style.styleSheet) { //IE
+        let func = function () {
+            try { //防止IE中stylesheet数量超过限制而发生错误
                 style.styleSheet.cssText = cssText;
-            }catch(e){
+            } catch (e) {
 
             }
         }
         //如果当前styleSheet还不能用，则放到异步中则行
-        if(style.styleSheet.disabled){
-            setTimeout(func,10);
-        }else{
+        if (style.styleSheet.disabled) {
+            setTimeout(func, 10);
+        } else {
             func();
         }
-    }else{ //w3c
+    } else { //w3c
         //w3c浏览器中只要创建文本节点插入到style元素中就行了
         let textNode = document.createTextNode(cssText);
         style.appendChild(textNode);
@@ -34,144 +34,153 @@ function addCSSText(cssText){
 
 
 // 处理顶部搜索栏目
-function fixedSearchInput(){
-	// 给搜索表单添加事件缩放尺寸
-	// let input = document.querySelector('form.SimpleSearchBar-wrapper input.Input');
-	// let form = document.querySelector('form.SimpleSearchBar-wrapper');
-	// 这个css是知乎动态赋予的，所以要延迟200ms开始执行；
-	let box = document.querySelector('.TopstoryPageHeader-aside');
+function fixedSearchInput() {
+    // 给搜索表单添加事件缩放尺寸
+    // let input = document.querySelector('form.SimpleSearchBar-wrapper input.Input');
+    // let form = document.querySelector('form.SimpleSearchBar-wrapper');
+    // 这个css是知乎动态赋予的，所以要延迟200ms开始执行；
+    let box = document.querySelector('.TopstoryPageHeader-aside');
     const logo = document.querySelector('.AppHeader-inner a[aria-label="知乎"]')
     const logo2 = document.querySelector('.TopstoryPageHeader-main a[aria-label="知乎"]')
     const zst = document.querySelector('.Tabs-item.AppHeader-Tab a[href="//www.zhihu.com/education/learning"]')
-	if(!box || !box.style || !logo || !logo2 ||!zst){
-		return setTimeout(fixedSearchInput,200)
-	}
-	// 隐藏顶部关注栏的知乎图标链接，节省空间
-	logo.remove();
-	logo2.remove();
-	// 移除知学堂
-	zst.remove();
-	
-	// box.style.setProperty('margin-left', '220px')
-	// input.addEventListener('focus', function () {
-	// 	form.style.setProperty('width', '200px');
-	// 	box.style.setProperty('margin-left', '0px');
-	// })
+    if (!box || !box.style || !logo || !logo2 || !zst) {
+        return setTimeout(fixedSearchInput, 200)
+    }
+    // 隐藏顶部关注栏的知乎图标链接，节省空间
+    logo.remove();
+    logo2.remove();
+    // 移除知学堂
+    zst.remove();
 
-	// form.addEventListener('click', function () {
-	// 	input.focus()
-	// })
+    // box.style.setProperty('margin-left', '220px')
+    // input.addEventListener('focus', function () {
+    // 	form.style.setProperty('width', '200px');
+    // 	box.style.setProperty('margin-left', '0px');
+    // })
 
-	// input.addEventListener('blur', function () {
-	// 	form.style.setProperty('width', '80px');
-	// 	box.style.setProperty('margin-left', '220px');
-	// })
-	document.body.scrollTop = document.documentElement.scrollTop = 0;
+    // form.addEventListener('click', function () {
+    // 	input.focus()
+    // })
+
+    // input.addEventListener('blur', function () {
+    // 	form.style.setProperty('width', '80px');
+    // 	box.style.setProperty('margin-left', '220px');
+    // })
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 }
 
 // js优化时间线手机样式
 function fixedTimeLineMobile() {
-	// 修复手机版的一些显示字样
-	let a = $('a.Tabs-link.AppHeader-TabsLink');
-	if (a && a.length >= 3) {
-		a[3].text = '你答';
-	}
-	fixedSearchInput()
+    // 修复手机版的一些显示字样
+    let a = $('a.Tabs-link.AppHeader-TabsLink');
+    if (a && a.length >= 3) {
+        a[3].text = '你答';
+    }
+    fixedSearchInput()
 
-	// 动态处理内容
-	removeThankButton(document)
-	hideVideo(document)
-	new MutationObserver((mutations, observer) => {
-		for (let m of mutations) {
-			for (let node of m.addedNodes) {
-				if (node.nodeType === Node.ELEMENT_NODE) {
+    // 动态处理内容
+    removeThankButton(document)
+    hideVideo(document)
+    new MutationObserver((mutations, observer) => {
+        for (let m of mutations) {
+            for (let node of m.addedNodes) {
+                if (node.nodeType === Node.ELEMENT_NODE) {
                     // 添加延迟，免得有些数据还没加载成功；
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         removeThankButton(node)
-					    hideVideo(node)
-					    popupCommentWindow(node)
-                    },400)
-				}
-			}
-		}
-	}).observe(document.body, {
-		childList: true,
-		subtree: true
-	})
+                        hideVideo(node)
+                        popupCommentWindow(node)
+                    }, 400)
+                }
+            }
+        }
+    }).observe(document.body, {
+        childList: true,
+        subtree: true
+    })
 }
 
 // 查找视频节点的父节点，找到答案卡片，直接移除
 function __video_parent__(item) {
-	if (item.parentElement.className.includes('Card TopstoryItem')) {
-		// 使用隐藏，避免知乎自己的刷新功能失效；
-		return item.parentElement.hidden = true;
-	} else {
-		return __video_parent__(item.parentElement)
-	}
+    if (item.parentElement.className.includes('Card TopstoryItem')) {
+        // 使用隐藏，避免知乎自己的刷新功能失效；
+        return item.parentElement.hidden = true;
+    } else {
+        return __video_parent__(item.parentElement)
+    }
 }
 
 // 隐藏视频
 function hideVideo(node) {
-	let selectors = []
-	
-	if(options.noVideo){
-		selectors.push('.ZVideoItem-video')
-		selectors.push('.VideoAnswerPlayer')
-	}
-	if(options.noAdv){
-		// 屏蔽广告
-		selectors.push('.Pc-feedAd-container')
-	}
-	let selectorsString = selectors.join(',')
-	if (options.noVideo) {
-		node.querySelectorAll(selectorsString).forEach(item => {
-			__video_parent__(item)
-		})
-	}
+    let selectors = []
+
+    if (options.noVideo) {
+        selectors.push('.ZVideoItem-video')
+        selectors.push('.VideoAnswerPlayer')
+    }
+    if (options.noAdv) {
+        // 屏蔽广告
+        selectors.push('.Pc-feedAd-container')
+    }
+    let selectorsString = selectors.join(',')
+    if (options.noVideo) {
+        node.querySelectorAll(selectorsString).forEach(item => {
+            __video_parent__(item)
+        })
+    }
 }
 
 // 处理感谢按钮
 function removeThankButton(node) {
-	// 赞同数量减少字
-    node.querySelectorAll('.Button.VoteButton.VoteButton--up')
-        .forEach(btn=>{
-            btn.childNodes[1].textContent = btn.childNodes[1].textContent.replace('赞同','赞')
+    // 赞同数量减少字
+    node.querySelectorAll('.Button.VoteButton')
+        .forEach(btn => {
+            btn.style.padding = '0 6px';
+            btn.childNodes.forEach(child => {
+                if (child.nodeType === Node.TEXT_NODE) {
+                    child.textContent = child.textContent.replace('赞同', '赞')
+                }
+            })
         })
 
     // button.BottomActions-CommentBtn为专栏的浮动按钮，下面的申请转载也是专栏特有
-	node.querySelectorAll('button.ContentItem-action,button.BottomActions-CommentBtn')
-		.forEach(btn => {
-			let $text = btn.childNodes[1]
-			let group
-			if ($text && $text.nodeType === Node.TEXT_NODE) {
-				let text = $text.textContent.replace(' ', '');
-				if (['感谢', '取消感谢', '举报', '收藏', '喜欢','申请转载'].indexOf(text) >= 0) {
-					$text.textContent = ''
-				} else if (text === '添加评论') {
-					$text.textContent = '评论'
-				} else if ((group = text.match(/(\d+)条评论/))) {
-					$text.textContent = `${group[1]}`
-                } else if(text === '收起评论'){
-                    $text.textContent = '收评论'
-				} else {
-					console.log($text, 'text', text)
-				}
-			}
-		})
+    node.querySelectorAll('button.ContentItem-action,button.BottomActions-CommentBtn')
+        .forEach(btn => {
+            console.log(btn, 'button')
+            let $text = btn.childNodes[1]
+            let text = '';
+            if (typeof $text === 'string') {
+                text = $text.replace(' ', '');
+            } else if ($text && $text.nodeType === Node.TEXT_NODE) {
+                text = $text.textContent.replace(' ', '');
+            }
+            if (['感谢', '取消感谢', '举报', '收藏', '喜欢', '申请转载'].indexOf(text) >= 0) {
+                $text.textContent = ''
+            } else if (text === '添加评论') {
+                $text.textContent = '评论'
+            } else if ((group = text.match(/(\d+)条评论/))) {
+                $text.textContent = `${group[1]}`
+            } else if (text === '收起评论') {
+                $text.textContent = '收评论'
+            } else {
+                console.log($text, 'text', text)
+            }
+
+        })
 
 }
 
 // 当文章展开得时候，点击评论，会是一个弹窗，处理弹窗得宽度和关闭按钮
-function popupCommentWindow(node){
-	const popup = $("div[class^='css-'][tabindex='0']")
-	if(popup && popup[0] && popup[0].style){
-		popup[0].style.width = '100%'
-		const button = popup.find('button[aria-label="关闭"]')
-		if(button && button[0]){
-			button[0].style.right='140px';
-			button[0].style.background='#ccc';
-			button[0].style.top='0px';
-		}
-	}
+function popupCommentWindow(node) {
+    const popup = $("div[class^='css-'][tabindex='0']")
+    if (popup && popup[0] && popup[0].style) {
+        popup[0].style.width = '100%'
+        const button = popup.find('button[aria-label="关闭"]')
+        if (button && button[0]) {
+            button[0].style.right = '140px';
+            button[0].style.background = '#ccc';
+            button[0].style.top = '0px';
+        }
+    }
 }

@@ -1,6 +1,14 @@
 /* Header */
+
+* {
+    max-width: 100vw!important;
+}
 .AppHeader {
     min-width: inherit;
+    overflow-x: scroll;
+}
+.AppHeader::-webkit-scrollbar {
+  display: none;
 }
 .AppHeader-inner {
     width: 100%;
