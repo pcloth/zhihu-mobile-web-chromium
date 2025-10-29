@@ -37,7 +37,11 @@ chrome.runtime.onInstalled.addListener(function(){
 chrome.runtime.onMessage.addListener(function(message, sender){
 	if(message.zhihuInjected == true){
 		// 显示popup.html
-		chrome.pageAction.show(sender.tab.id);
+		if (chrome.action && chrome.action.show) {
+			chrome.action.show(sender.tab.id);
+		} else if (chrome.pageAction && chrome.pageAction.show) {
+			chrome.pageAction.show(sender.tab.id);
+		}
 	}
 });
 

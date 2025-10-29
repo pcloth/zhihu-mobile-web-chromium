@@ -5,7 +5,7 @@
 }
 .AppHeader {
     min-width: inherit;
-    overflow-x: scroll;
+    overflow-x: scroll!important;
 }
 .AppHeader::-webkit-scrollbar {
   display: none;
@@ -17,7 +17,7 @@
 }
 
 .AppHeader-inner .SearchBar {
-    display: none;
+    display: none!important;
 }
 
 .SearchBar-input {

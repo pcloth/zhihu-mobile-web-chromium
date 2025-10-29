@@ -147,7 +147,6 @@ function removeThankButton(node) {
     // button.BottomActions-CommentBtn为专栏的浮动按钮，下面的申请转载也是专栏特有
     node.querySelectorAll('button.ContentItem-action,button.BottomActions-CommentBtn')
         .forEach(btn => {
-            console.log(btn, 'button')
             let $text = btn.childNodes[1]
             let text = '';
             if (typeof $text === 'string') {
