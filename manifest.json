@@ -1,20 +1,20 @@
 {
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "manifest_version": 2,
+   "manifest_version": 3,
    "name": "知乎(chromium安卓浏览器)",
    "description": "针对手机竖屏优化，目前兼容yandex和kiwi浏览器",
    "permissions": [
-      "webRequest",
-      "webRequestBlocking",
-      "*://*.zhihu.com/",
+      "storage",
       "tabs",
-      "storage"
+      "declarativeNetRequest",
+      "declarativeNetRequestWithHostAccess"
    ],
    "version": "2023.08.23",
    "background": {
-      "page": "background.html"
+      "service_worker": "js/background-sw.js",
+      "type": "module"
    },
-   "page_action": {
+   "action": {
       "default_popup": "popup.html"
    },
    "content_scripts": [
@@ -102,7 +102,13 @@
       "48": "img/icon48.png",
       "128": "img/icon128.png"
    },
+   "host_permissions": [
+      "*://*.zhihu.com/"
+   ],
    "web_accessible_resources": [
-      "zhihuMobile.css"
+      {
+         "resources": ["zhihuMobile.css", "js/inject-ua.js"],
+         "matches": ["*://*.zhihu.com/*"]
+      }
    ]
 }
